@@ -6,9 +6,9 @@ import LinearIndeterminate from '../../components/Loading.jsx/Loading';
 const Appointments = () => {   
     const [appointments, setAppointments] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [appId, SetAppId] = useState({id:""});
 
-    useEffect(() => {
+    const fetchAppointments = () => {
+        setLoading(true);
         fetch("http://localhost:8800/api/getAllAppointments")
             .then((res) => res.json())
             .then((data) => {
@@ -31,26 +31,19 @@ const Appointments = () => {
                                         Reject
                                     </button>
                                 </div>
-                            )
-                            :appointment.status === 'Accepted' ? (
+                            ) : appointment.status === 'Accepted' ? (
                                 <div>
-                                    <button 
-                                        className="action-button accept-button"
-                                    >
+                                    <button className="action-button accept-button">
                                         Accepted
                                     </button>
                                 </div>
-                            )
-                            :appointment.status === 'Rejected' && (
+                            ) : appointment.status === 'Rejected' ? (
                                 <div>
-                                    <button 
-                                        className="action-button accept-button"
-                                        style={{backgroundColor: 'red'}}
-                                    >
+                                    <button className="action-button reject-button">
                                         Rejected
                                     </button>
                                 </div>
-                            )
+                            ) : null
                         )
                     }));
                     setAppointments(updatedData);
@@ -64,34 +57,48 @@ const Appointments = () => {
             .finally(() => {
                 setLoading(false);
             });
+    };
+
+    useEffect(() => {
+        fetchAppointments();
     }, []);
 
-    const handleAccept = async(appointmentId) => {
-        appId.id = appointmentId;
+    const handleAccept = async (appointmentId) => {
         await fetch("http://localhost:8800/api/acceptAppointment", {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(appId),               
-        }).then((res) => res.json()).then((data) => {
-            data.success ? alert(data.success) : alert(data.error)
+            body: JSON.stringify({ id: appointmentId }),
         })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.success) {
+                fetchAppointments(); // Refetch appointments data
+            } else {
+                alert(data.error);
+            }
+        });
     };
 
-    const handleReject = async(appointmentId) => {
-        appId.id = appointmentId;
+    const handleReject = async (appointmentId) => {
         await fetch("http://localhost:8800/api/rejectedAppointment", {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(appId),               
-        }).then((res) => res.json()).then((data) => {
-            data.success ? alert(data.success) : alert(data.error)
+            body: JSON.stringify({ id: appointmentId }),
         })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.success) {
+                fetchAppointments(); // Refetch appointments data
+            } else {
+                alert(data.error);
+            }
+        });
     };
 
     const columns = useMemo(
