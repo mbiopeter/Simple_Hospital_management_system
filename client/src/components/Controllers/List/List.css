@@ -1,0 +1,43 @@
+.list {
+    width: 100%;
+    height: auto;
+    padding: 30px 20px;
+}
+
+.list-title {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+.list-title span {
+    font-size: 18px;
+    font-weight: bold;
+    color: purple;
+    ;
+}
+
+.list-title button {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    color: gray;
+    background-color: rgb(244, 165, 19);
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 2px;
+}
+
+@media(max-width:576px) {
+    .list {
+        width: 100vw;
+    }
+
+    .list-title span {
+        font-size: 16px;
+    }
+
+    .list-title button {
+        font-size: 12px;
+    }
+}

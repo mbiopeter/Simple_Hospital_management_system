@@ -1,0 +1,10 @@
+.input,
+select {
+    font-size: 16px;
+    padding: 15px 10px;
+    border: 1px solid #ccc;
+    background-color: transparent;
+    color: gray;
+    outline: blue;
+    border-radius: 3px;
+}

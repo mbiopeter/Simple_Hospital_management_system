@@ -1,0 +1,233 @@
+.dashboard {
+    width: 100%;
+    height: auto;
+    padding: 30px 20px;
+}
+
+.dashboard-desc {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.charts {
+    padding: 40px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+}
+
+.fotter {
+    height: auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.footer-table {
+
+    box-shadow: -1px 3px 10px 0px rgba(204, 196, 196, 0.75);
+    -webkit-box-shadow: -1px 3px 10px 0px rgba(204, 196, 196, 0.75);
+    -moz-box-shadow: -1px 3px 10px 0px rgba(204, 196, 196, 0.75);
+    padding: 20px;
+}
+
+.footer-table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.footer-table-header span {
+    font-size: 16px;
+    font-weight: bold;
+    color: purple;
+}
+
+.footer-table-header input {
+    width: 150px;
+    background-color: transparent;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: none;
+}
+
+.footer-table-rows {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1.5fr;
+}
+
+.footer-table-item {
+    padding: 10px 0;
+    border-bottom: 2px solid rgb(231, 231, 231);
+    font-size: 16px;
+    color: rgb(95, 94, 94);
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.footer-table-item span {
+    color: #000000
+}
+
+.footer-table-item-profile {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.footer-table-item-profile img {
+    object-fit: cover;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.footer-table-item button {
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #8b8a8a;
+    border: none;
+    cursor: pointer;
+    background: rgb(255, 169, 10);
+}
+
+.footer-action {
+    justify-content: space-between;
+    padding-right: 20px;
+}
+
+.footer-calender {
+    height: auto;
+    border-radius: 5px;
+    box-shadow: -1px 3px 10px 0px rgba(204, 196, 196, 0.75);
+    -webkit-box-shadow: -1px 3px 10px 0px rgba(204, 196, 196, 0.75);
+    -moz-box-shadow: -1px 3px 10px 0px rgba(204, 196, 196, 0.75);
+    display: flex;
+    border-radius: 5px;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footer-calender-user {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 20px;
+}
+
+.footer-calender-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    gap: 5px;
+}
+
+.footer-calender-img img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.footer-calender-img h6 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.footer-calender-img span {
+    font-size: 10px;
+    font-weight: 600;
+    color: gray;
+}
+
+.footer-calender-user-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.fotter-calender-desc {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.fotter-calender-desc span {
+    font-size: 14px;
+    color: gray;
+    font-weight: 500;
+}
+
+@media(max-width:576px) {
+    .dashboard {
+        width: 100vw;
+    }
+
+    .dashboard-desc {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .charts {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .fotter {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-table-rows {
+        grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+    }
+
+    .footer-table-header span {
+        font-size: 13px;
+    }
+
+    .footer-table-item {
+        font-size: 10px;
+    }
+
+    .VisibilityOffIcon {
+        display: none;
+    }
+
+    .footer-table-item button {
+        padding: 3px 6px;
+        font-size: 10px;
+    }
+
+    .footer-calender-img img {
+        height: 50px;
+        width: 50px;
+    }
+
+    .footer-calender-img h6 {
+        font-size: 13px;
+    }
+
+    .footer-calender-img span {
+        font-size: 9px;
+    }
+
+    .footer-calender-user-title {
+        font-size: 15px;
+    }
+
+    .fotter-calender-desc span {
+        font-size: 11px;
+    }
+}

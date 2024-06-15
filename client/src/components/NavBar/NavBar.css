@@ -1,0 +1,132 @@
+.navbar {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 6px 1px 13px -3px rgba(179, 177, 177, 1);
+    -webkit-box-shadow: 6px 1px 13px -3px rgba(179, 177, 177, 1);
+    -moz-box-shadow: 6px 1px 13px -3px rgba(179, 177, 177, 1);
+    position: relative;
+}
+
+.navbar-left {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    color: gray;
+}
+
+.navbar-left-mobile {
+    display: none;
+}
+
+.navbar-search {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 5px;
+    width: 70%;
+    border: 1px solid grey;
+    height: auto;
+    border-radius: 20px;
+    padding: 0 10px;
+}
+
+.navbar-search input {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding: 7px;
+    font-size: 16px;
+    padding-left: 0;
+    width: 100%;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    color: gray;
+}
+
+.navbar-icon {
+    cursor: pointer;
+}
+
+.navbar-notification {
+    position: relative;
+}
+
+.navbar-notification-counter {
+    position: absolute;
+    top: -3px;
+    right: -2px;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+    color: #FFFFFF;
+    font-size: 9px;
+    font-weight: bold;
+    border: 1px solid #FFFFFF;
+}
+
+.notification-drop {
+    position: absolute;
+    z-index: 5;
+    top: 62px;
+    right: 20px;
+    width: 250px;
+    height: auto;
+    box-shadow: 6px 1px 13px -3px rgba(179, 177, 177, 1);
+    -webkit-box-shadow: 6px 1px 13px -3px rgba(179, 177, 177, 1);
+    -moz-box-shadow: 6px 1px 13px -3px rgba(179, 177, 177, 1);
+    background-color: #FFFFFF;
+}
+
+.notification-item {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding-bottom: 20px;
+}
+
+@media(max-width:576px) {
+    .navbar {
+        width: 100vw;
+    }
+
+    .navbar-search {
+        display: none;
+    }
+
+    .notification-drop {
+        width: calc(100% - 40px);
+    }
+
+    .navbar-AutoAwesomeMosaicIcon {
+        display: none;
+    }
+
+    .navbar-left-mobile {
+        display: block;
+    }
+
+    .navbar-left-icon {
+        display: none;
+    }
+
+    .navbar-right {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
