@@ -163,7 +163,7 @@ export const sheduleAppointment = (req, res) => {
                         req.body.Doctor,
                         req.body.Date,
                         req.body.Time,
-                        'pedding',
+                        'Pedding',
                         req.body.user
                     ];
                     db.query(updateQuery, params, (err, data) => {
@@ -185,7 +185,7 @@ export const sheduleAppointment = (req, res) => {
                         req.body.Doctor,
                         req.body.Date,
                         req.body.Time,
-                        'pedding',
+                        'Pedding',
                         req.body.user
                     ];
 
@@ -411,6 +411,46 @@ export const getAllAppointments = (req, res) => {
     });
 }
 
+
+export const getAllTreatments = (req, res) => {
+    const selectQuery = `SELECT 
+        p.FirstName,
+        p.LastName,
+        t.DiagnosisCode, 
+        t.DiagnosisDate, 
+        t.TreatmentType, 
+        t.TreatmentStart, 
+        t.TreatmentEnd 
+    FROM 
+        treatments AS t
+    INNER JOIN 
+        patients AS p
+    ON
+        p.RegistrationNumber = t.PatientRegistrationNumber
+    `;
+
+    db.query(selectQuery, (err, data) => {
+        if (err) {
+            return res.status(500).json({ error: "Error fetching treatments", error: err });
+        }
+        if (data) {
+            const formattedData = data.map(patient => ({
+                name: {
+                    firstName: patient.FirstName,
+                    lastName: patient.LastName,
+                },
+                diagnosisCode: patient.DiagnosisCode,
+                diagnosisDate: patient.DiagnosisDate,
+                treatmentType: patient.TreatmentType,
+                treatmentStart: patient.TreatmentStart,
+                treatmentEnd: patient.treatmentEnd,
+            }));
+
+            return res.status(200).json({ data: formattedData });
+        }
+    });
+}
+
 export const acceptAppointment = (req, res) => {
     const updateQuery = `
         UPDATE appointments SET status = ? WHERE id = ?;
@@ -435,3 +475,46 @@ export const rejectedAppointment = (req, res) => {
     })
 }
 
+
+export const AllEmployees = (req, res) => {
+    const selectQuery = `
+        SELECT id,FirstName, LastName,Roles FROM employees
+    `;
+
+    db.query(selectQuery, (err, data) => {
+        if (err) {
+            return res.status(500).json({ error: "Error fetching employees", details: err });
+        }
+
+        if (data.length === 0) {
+            return res.status(404).json({ error: "No employees found" });
+        }
+
+        const employees = data.map(employee => {
+            return {
+                id: employee.id,
+                role: employee.Roles,
+                fullName: employee.FirstName + " " + employee.LastName
+            };
+        });
+
+        return res.status(200).json({ data: employees });
+    });
+};
+
+export const maxRegNo = (req, res) => {
+    const selectQuery = `
+        SELECT MAX(id) AS id FROM patients;
+    `;
+    db.query(selectQuery, (err, data) => {
+        if (err) {
+            return res.status(500).json({ error: "Error fetching patients", details: err });
+        }
+        if (data.length > 0) {
+            const formattedData = { id: data[0].id + 1 };
+            return res.status(200).json({ data: formattedData });
+        } else {
+            return res.status(404).json({ error: "No patients found" });
+        }
+    });
+}

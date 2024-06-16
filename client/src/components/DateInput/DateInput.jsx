@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 export default function BasicDatePicker({ placeholder, handleOnChange, name, user, setUser }) {
     const [selectedDate, setSelectedDate] = useState(null);
 
-    // Initialize the date value from the employees object if available
+    // Initialize the date value from the user object if available
     useEffect(() => {
         if (user && user[name]) {
             setSelectedDate(dayjs(user[name]));
@@ -18,12 +18,12 @@ export default function BasicDatePicker({ placeholder, handleOnChange, name, use
 
     const handleDateChange = (newDate) => {
         setSelectedDate(newDate);
-        const isoDate = newDate ? newDate.toISOString() : '';
+        const formattedDate = newDate ? newDate.format('YYYY-MM-DD') : '';
         setUser((prevState) => ({
             ...prevState,
-            [name]: isoDate
+            [name]: formattedDate
         }));
-        handleOnChange({ target: { name, value: isoDate } });
+        handleOnChange({ target: { name, value: formattedDate } });
     };
 
     return (

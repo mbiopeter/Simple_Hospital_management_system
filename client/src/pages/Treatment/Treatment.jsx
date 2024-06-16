@@ -1,54 +1,28 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import List from '../../components/Controllers/List/List';
+import LinearIndeterminate from '../../components/Loading.jsx/Loading';
 
 const Treatments = () => {    
-    const data = [
-        {
-            name: {
-                firstName: 'John',
-                lastName: 'Doe',
-            },
-            address: '261 Erdman Ford',
-            city: 'East Daphne',
-            state: 'Kentucky',
-        },
-        {
-            name: {
-                firstName: 'Jane',
-                lastName: 'Doe',
-            },
-            address: '769 Dominic Grove',
-            city: 'Columbus',
-            state: 'Ohio',
-        },
-        {
-            name: {
-                firstName: 'Joe',
-                lastName: 'Doe',
-            },
-            address: '566 Brakus Inlet',
-            city: 'South Linda',
-            state: 'West Virginia',
-        },
-        {
-            name: {
-                firstName: 'Kevin',
-                lastName: 'Vandy',
-            },
-            address: '722 Emie Stream',
-            city: 'Lincoln',
-            state: 'Nebraska',
-        },
-        {
-            name: {
-                firstName: 'Joshua',
-                lastName: 'Rolluffs',
-            },
-            address: '32188 Larkin Turnpike',
-            city: 'Charleston',
-            state: 'South Carolina',
-        },
-    ];
+    const [treatments, setTreatments] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch("http://localhost:8800/api/getAllTreatments")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data && data.data) {
+                    setTreatments(data.data);
+                } else {
+                    console.error("Invalid response structure", data);
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching treatments:", error);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
 
     const columns = useMemo(
         () => [
@@ -63,29 +37,44 @@ const Treatments = () => {
                 size: 150,
             },
             {
-                accessorKey: 'address', // normal accessorKey
-                header: 'Address',
+                accessorKey: 'diagnosisCode', // normal accessorKey
+                header: 'Diagnosis Code',
                 size: 200,
             },
             {
-                accessorKey: 'city',
-                header: 'City',
+                accessorKey: 'diagnosisDate',
+                header: 'Diagnosis Date',
                 size: 150,
             },
             {
-                accessorKey: 'state',
-                header: 'State',
+                accessorKey: 'treatmentType',
+                header: 'Treatment Type',
+                size: 150,
+            },
+            {
+                accessorKey: 'treatmentStart',
+                header: 'Treatment Start',
+                size: 150,
+            },
+            {
+                accessorKey: 'treatmentEnd',
+                header: 'Treatment End',
                 size: 150,
             },
         ],
         []
     );
+
+    if (loading) {
+        return <LinearIndeterminate/>;
+    }
+
     return (
         <List 
         title='All Treatments'
         path='/treatment/New'
         button='Add Treatment'
-        data={data}
+        data={treatments}
         columns={columns}
         />
     )

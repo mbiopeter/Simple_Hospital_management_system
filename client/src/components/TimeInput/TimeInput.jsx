@@ -9,21 +9,21 @@ import dayjs from 'dayjs';
 export default function BasicTimePicker({ placeholder, handleOnChange, name, user, setUser }) {
     const [selectedTime, setSelectedTime] = useState(null);
 
-    // Initialize the date value from the user object if available
+    // Initialize the time value from the user object if available
     useEffect(() => {
         if (user && user[name]) {
-            setSelectedTime(dayjs(user[name]));
+            setSelectedTime(dayjs(user[name], 'HH:mm'));
         }
     }, [user, name]);
 
-    const handleDateChange = (newDate) => {
-        setSelectedTime(newDate);
-        const isoDate = newDate ? newDate.toISOString() : '';
+    const handleTimeChange = (newTime) => {
+        setSelectedTime(newTime);
+        const formattedTime = newTime ? newTime.format('HH:mm') : '';
         setUser((prevState) => ({
             ...prevState,
-            [name]: isoDate
+            [name]: formattedTime
         }));
-        handleOnChange({ target: { name, value: isoDate } });
+        handleOnChange({ target: { name, value: formattedTime } });
     };
 
     return (
@@ -32,7 +32,8 @@ export default function BasicTimePicker({ placeholder, handleOnChange, name, use
                 <TimePicker 
                     label={placeholder} 
                     value={selectedTime}
-                    onChange={handleDateChange}
+                    onChange={handleTimeChange}
+                    ampm // Display time in 12-hour format with AM/PM
                 />
             </DemoContainer>
         </LocalizationProvider>
